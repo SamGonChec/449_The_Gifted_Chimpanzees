@@ -11,7 +11,7 @@ void Board::paintEvent(QPaintEvent */*event*/) {
 
     painter.setBrush(QColor(200,200,115));
     painter.drawRect(QRect(50, 0, 700, 700));
-    //painter.drawRect(QRect(100, 50, 600, 600));
+    //Outer square
     chooseLineColor(&painter, 0);
     painter.drawLine(100,650,100,50);
     chooseLineColor(&painter, 1);
@@ -20,7 +20,7 @@ void Board::paintEvent(QPaintEvent */*event*/) {
     painter.drawLine(700,50,700,650);
     chooseLineColor(&painter, 3);
     painter.drawLine(700,650,100,650);
-    //painter.drawRect(QRect(200, 150, 400, 400));
+    //Middle square
     chooseLineColor(&painter, 4);
     painter.drawLine(200,550,200,150);
     chooseLineColor(&painter, 5);
@@ -29,7 +29,7 @@ void Board::paintEvent(QPaintEvent */*event*/) {
     painter.drawLine(600,150,600,550);
     chooseLineColor(&painter, 7);
     painter.drawLine(600,550,200,550);
-    //painter.drawRect(QRect(300, 250, 200, 200));
+    //Inner square
     chooseLineColor(&painter, 8);
     painter.drawLine(300,450,300,250);
     chooseLineColor(&painter, 9);
@@ -38,6 +38,7 @@ void Board::paintEvent(QPaintEvent */*event*/) {
     painter.drawLine(500,250,500,450);
     chooseLineColor(&painter, 11);
     painter.drawLine(500,450,300,450);
+    //Crossing lines
     chooseLineColor(&painter, 12);
     painter.drawLine(100,350,300,350);
     chooseLineColor(&painter, 13);
@@ -53,7 +54,7 @@ void Board::chooseLineColor(QPainter *painter, int millIndex) {
     unsigned int i;
     painter->setPen(Qt::black);
     for (i = 0; i < currentMills.size(); i++) {
-        if (currentMills[i] == millIndex){
+        if (currentMills[i] == millIndex) {
             painter->setPen(Qt::blue);
         }
     }
