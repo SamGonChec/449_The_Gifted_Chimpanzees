@@ -13,9 +13,9 @@ void Space::paint(QPainter *painter, const QStyleOptionGraphicsItem */*option*/,
 /*Overloading function to implement appearance*/
     if (hover) {
         if (validMove) {
-            painter->setBrush(Qt::green);
+            painter->setBrush(Qt::green); // Green fill if mouse hover and valid move
         } else {
-            painter->setBrush(Qt::red);
+            painter->setBrush(Qt::red); // Red fill if mouse hover and invalid move
         }
     }
     painter->drawEllipse(rectangle);
