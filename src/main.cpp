@@ -1,7 +1,7 @@
-#include "board.h"
-#include "piece.h"
-#include "space.h"
-#include "game.h"
+#include "include/board.h"
+#include "include/piece.h"
+#include "include/space.h"
+#include "include/game.h"
 
 #include <QApplication>
 #include <QGraphicsScene>
