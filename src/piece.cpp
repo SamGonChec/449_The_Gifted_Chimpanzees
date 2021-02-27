@@ -1,4 +1,4 @@
-#include "piece.h"
+#include "include/piece.h"
 
 Piece::Piece(int x, int y, bool white) {
     rectangle = QRectF(x, y, 30, 30);

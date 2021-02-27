@@ -1,4 +1,4 @@
-#include "space.h"
+#include "include/space.h"
 
 Space::Space(int x, int y) {
     rectangle = QRectF(x,y,20,20);
