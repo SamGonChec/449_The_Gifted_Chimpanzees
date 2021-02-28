@@ -8,11 +8,18 @@
 #include <vector>
 #include <QObject>
 #include <QGraphicsScene>
+#include <QtWidgets/QGraphicsProxyWidget>
+
 
 class Game : public QObject {
     Q_OBJECT
 public:
     Game(QGraphicsScene * scene);
+    ~Game();
+
+    void pieceCleanup(std::vector<Piece*> &pieces);
+    void boardCleanup(QGraphicsProxyWidget* proxyBoard);
+    void spaceCleanup(std::vector<Space*> &spaces);
 
     int getSpaceIndex(Space *space);
     void setAdjacentSpaces(Piece *piece, bool value);

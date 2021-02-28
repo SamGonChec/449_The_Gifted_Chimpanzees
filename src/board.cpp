@@ -1,6 +1,5 @@
 #include "include/board.h"
 
-
 Board::Board() {
     resize(800,800);
 }
