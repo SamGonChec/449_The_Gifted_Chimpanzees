@@ -12,10 +12,12 @@ Space::Space(int x, int y) {
 void Space::paint(QPainter *painter, const QStyleOptionGraphicsItem */*option*/, QWidget */*widget*/) {
 /*Overloading function to implement appearance*/
     if (hover) {
+        //Green fill if mouse hover and valid move
         if (validMove) {
-            painter->setBrush(Qt::green); // Green fill if mouse hover and valid move
+            painter->setBrush(Qt::green);
+        //Red fill if mouse hover and invalid move
         } else {
-            painter->setBrush(Qt::red); // Red fill if mouse hover and invalid move
+            painter->setBrush(Qt::red);
         }
     }
     painter->drawEllipse(rectangle);

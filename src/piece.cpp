@@ -15,16 +15,20 @@ Piece::Piece(int x, int y, bool white) {
 
 void Piece::paint(QPainter *painter, const QStyleOptionGraphicsItem */*option*/, QWidget */*widget*/) {
 /*Overloading function for appearance*/
+    //White fill for white piece
     if (whitePiece) {
-        painter->setBrush(Qt::white); // White fill for white piece
+        painter->setBrush(Qt::white);
+    //Black fill for black piece
     } else {
-        painter->setBrush(Qt::black); // Black fill for black piece
+        painter->setBrush(Qt::black);
     }
+    //Green fill for selected piece
     if (selected) {
-        painter->setBrush(Qt::green); // Green fill for selected piece
+        painter->setBrush(Qt::green);
     }
+    //Green outline on clickable pieces when the mouse hovers
     if ((hover && selectEnabled) || (hover && captureEnabled)) {
-        painter->setPen(Qt::green); // Green outline on clickable pieces when the mouse hovers
+        painter->setPen(Qt::green);
     }
     painter->drawEllipse(rectangle);
 }
