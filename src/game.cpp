@@ -1,5 +1,12 @@
 #include "include/game.h"
 
+Game::~Game(){
+    Game::pieceCleanup(whitePieces);
+    Game::pieceCleanup(blackPieces);
+    Game::spaceCleanup(spaceList);
+    scene->removeItem(board->graphicsProxyWidget());
+}
+
 Game::Game(QGraphicsScene *scene) {
     //Initializing data members
     whiteTurn = true;
@@ -94,6 +101,25 @@ Game::Game(QGraphicsScene *scene) {
     //Selecting first piece
     selectPiece(whitePieces[0]);
 
+}
+
+
+// Freeing up piece memory at the end of the game
+void Game::pieceCleanup(std::vector<Piece*> &pieces){
+    for (Piece* pointer: pieces){
+        scene->removeItem(pointer);
+        delete pointer;
+    }
+    pieces.clear();
+}
+
+// Freeing board memory at the end of the game
+void Game::spaceCleanup(std::vector<Space*> &spaces){
+    for (Space* pointer: spaces){
+        scene->removeItem(pointer);
+        delete pointer;
+    }
+    spaces.clear();
 }
 
 int Game::getSpaceIndex(Space *space) {
