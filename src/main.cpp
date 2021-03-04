@@ -9,10 +9,10 @@
 #include <QGraphicsEllipseItem>
 
 int main(int argc, char *argv[]) {
-    QApplication a(argc, argv);
+    QApplication application(argc, argv);
     QGraphicsScene scene;
     QGraphicsView view;
-    Game g(&scene);
+    Game game(&scene);
 
     //Adjusting the view, setting the scene
     view.resize(800,800);
@@ -21,5 +21,5 @@ int main(int argc, char *argv[]) {
     view.setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     view.show();
-    return a.exec();
+    return application.exec();
 }
