@@ -1,42 +1,44 @@
 #include "include/space.h"
 
 Space::Space(int x, int y) {
-    rectangle = QRectF(x,y,20,20);
-    setAcceptHoverEvents(true);
+    resize(21,21);
+    move(x,y);
+    setAttribute(Qt::WA_NoSystemBackground);
     hover = false;
     white = true;
     occupied = false;
     validMove = true;
 }
 
-void Space::paint(QPainter *painter, const QStyleOptionGraphicsItem */*option*/, QWidget */*widget*/) {
+void Space::paintEvent(QPaintEvent */*event*/) {
 /*Overloading function to implement appearance*/
+    QPainter painter(this);
     if (hover) {
         //Green fill if mouse hover and valid move
         if (validMove) {
-            painter->setBrush(Qt::green);
+            painter.setBrush(Qt::green);
         //Red fill if mouse hover and invalid move
         } else {
-            painter->setBrush(Qt::red);
+            painter.setBrush(Qt::red);
         }
     }
-    painter->drawEllipse(rectangle);
+    painter.drawEllipse(0,0,20,20);
 }
 
-void Space::mousePressEvent(QGraphicsSceneMouseEvent */*event*/) {
+void Space::mousePressEvent(QMouseEvent */*event*/) {
 /*Signals mouse clicked on space if not occupied*/
     if (!occupied && validMove) {
         emit clicked(this);
     }
 }
 
-void Space::hoverEnterEvent(QGraphicsSceneHoverEvent */*event*/) {
+void Space::enterEvent(QEvent */*event*/) {
 /*Changes appearance when mouse enters rect*/
     hover = true;
     update();
 }
 
-void Space::hoverLeaveEvent(QGraphicsSceneHoverEvent */*event*/) {
+void Space::leaveEvent(QEvent */*event*/) {
 /*Reverts appearance when mouse leaves rect*/
     hover = false;
     update();

@@ -64,8 +64,7 @@ Game::Game(QGraphicsScene *scene) {
     spaceList.push_back(new Space(690,40));  //Space G7
 
     for (i = 0; i < spaceList.size(); i++) {
-        spaceList[i]->setZValue(90);
-        scene->addItem(spaceList[i]);
+        scene->addWidget(spaceList[i]);
     }
 
     //Adding white pieces
@@ -79,8 +78,7 @@ Game::Game(QGraphicsScene *scene) {
     whitePieces.push_back(new Piece(225, 760));
     whitePieces.push_back(new Piece(275, 760));
     for (i = 0; i < whitePieces.size(); i++) {
-        whitePieces[i]->setZValue(100);
-        scene->addItem(whitePieces[i]);
+        scene->addWidget(whitePieces[i]);
     }
 
     //Adding black pieces
@@ -94,8 +92,7 @@ Game::Game(QGraphicsScene *scene) {
     blackPieces.push_back(new Piece(600, 760, false));
     blackPieces.push_back(new Piece(650, 760, false));
     for (i = 0; i < blackPieces.size(); i++) {
-        blackPieces[i]->setZValue(100);
-        scene->addItem(blackPieces[i]);
+        scene->addWidget(blackPieces[i]);
     }
 
     //Selecting first piece
@@ -107,7 +104,7 @@ Game::Game(QGraphicsScene *scene) {
 // Freeing up piece memory at the end of the game
 void Game::pieceCleanup(std::vector<Piece*> &pieces){
     for (Piece* pointer: pieces){
-        scene->removeItem(pointer);
+        scene->removeItem(pointer->graphicsProxyWidget());
         delete pointer;
     }
     pieces.clear();
@@ -116,7 +113,7 @@ void Game::pieceCleanup(std::vector<Piece*> &pieces){
 // Freeing board memory at the end of the game
 void Game::spaceCleanup(std::vector<Space*> &spaces){
     for (Space* pointer: spaces){
-        scene->removeItem(pointer);
+        scene->removeItem(pointer->graphicsProxyWidget());
         delete pointer;
     }
     spaces.clear();
@@ -446,7 +443,7 @@ void Game::startNewTurn() {
 
 void Game::pieceCaptureAction(Piece *piece) {
 /*Slot for action taken when capturable piece clicked*/
-    scene->removeItem(piece);
+    scene->removeItem(piece->graphicsProxyWidget());
     piece->getSpace()->setOccupied(false);
     piece->setCaptured(true);
     disableCapturePiece();

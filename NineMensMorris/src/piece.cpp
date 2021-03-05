@@ -1,8 +1,9 @@
 #include "include/piece.h"
 
 Piece::Piece(int x, int y, bool white) {
-    rectangle = QRectF(x, y, 30, 30);
-    setAcceptHoverEvents(true);
+    resize(31,31);
+    move(x, y);
+    setAttribute(Qt::WA_NoSystemBackground);
     whitePiece = white;
     hover = false;
     inPlay = false;
@@ -13,27 +14,28 @@ Piece::Piece(int x, int y, bool white) {
     captured = false;
 }
 
-void Piece::paint(QPainter *painter, const QStyleOptionGraphicsItem */*option*/, QWidget */*widget*/) {
+void Piece::paintEvent(QPaintEvent */*event*/) {
 /*Overloading function for appearance*/
+    QPainter painter(this);
     //White fill for white piece
     if (whitePiece) {
-        painter->setBrush(Qt::white);
+        painter.setBrush(Qt::white);
     //Black fill for black piece
     } else {
-        painter->setBrush(Qt::black);
+        painter.setBrush(Qt::black);
     }
     //Green fill for selected piece
     if (selected) {
-        painter->setBrush(Qt::green);
+        painter.setBrush(Qt::green);
     }
     //Green outline on clickable pieces when the mouse hovers
     if ((hover && selectEnabled) || (hover && captureEnabled)) {
-        painter->setPen(Qt::green);
+        painter.setPen(Qt::green);
     }
-    painter->drawEllipse(rectangle);
+    painter.drawEllipse(0,0,30,30);
 }
 
-void Piece::mousePressEvent(QGraphicsSceneMouseEvent */*event*/) {
+void Piece::mousePressEvent(QMouseEvent */*event*/) {
 /*Action taken when piece clicked*/
     if (captureEnabled) {
         emit clickCapture(this);
@@ -42,13 +44,13 @@ void Piece::mousePressEvent(QGraphicsSceneMouseEvent */*event*/) {
     }
 }
 
-void Piece::hoverEnterEvent(QGraphicsSceneHoverEvent */*event*/) {
+void Piece::hoverEnterEvent(QEvent */*event*/) {
 /*Change appearance when mouse enters rect*/
     hover = true;
     update();
 }
 
-void Piece::hoverLeaveEvent(QGraphicsSceneHoverEvent */*event*/) {
+void Piece::hoverLeaveEvent(QEvent */*event*/) {
 /*Change appearance when mouse leaves rect*/
     hover = false;
     update();
@@ -64,8 +66,7 @@ void Piece::moved(Space *space) {
     inSpace = space;
     space->setOccupied(true);
     space->setWhite(whitePiece);
-    setPos(space->boundingRect().x() / 2 - 2.5, space->boundingRect().y() / 2 - 2.5);
-    this->rectangle = QRectF(space->boundingRect().x() / 2 - 2.5, space->boundingRect().y() / 2 - 2.5, 30, 30);
+    move(space->x() - 5, space->y() - 5);
     update();
     emit turnTaken(this);
 }

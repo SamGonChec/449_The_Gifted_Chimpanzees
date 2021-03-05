@@ -42,6 +42,11 @@ public:
     void endTurn(Piece *piece);
     void startNewTurn();
 
+    //Functions for testing
+    Space *getSpace(int spaceIndex) { return spaceList[spaceIndex]; }
+
+    bool testWhiteTurn() { return whiteTurn; }
+
 private:
     QGraphicsScene *scene;
     Board *board;

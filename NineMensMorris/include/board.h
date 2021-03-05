@@ -3,13 +3,13 @@
 
 #include <vector>
 #include <QPainter>
-#include <QMainWindow>
+#include <QWidget>
 
 class Board : public QWidget {
 
 public:
     Board();
-    virtual void paintEvent(QPaintEvent * event);
+    void paintEvent(QPaintEvent * event);
     void chooseLineColor(QPainter *painter, int millIndex);
     void updateMillLines(std::vector<int> &millVector);
 private:

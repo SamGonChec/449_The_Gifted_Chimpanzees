@@ -1,2 +1,4 @@
 # ignore local config file(s)
+GameProject.pro.user
 NineMensMorris.pro.user
+test.pro.user

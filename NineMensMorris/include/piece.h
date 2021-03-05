@@ -3,16 +3,11 @@
 
 #include "space.h"
 
-#include <QGraphicsItem>
-#include <QPainter>
-#include <QPaintEvent>
-
-class Piece : public QObject, public QGraphicsItem {
+class Piece : public QWidget {
     Q_OBJECT
 public:
     Piece(int x, int y, bool white = true);
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option = 0, QWidget *widget = 0);
-    QRectF boundingRect() const { return rectangle; }
+    void paintEvent(QPaintEvent * event);
     Space *getSpace() { return inSpace; }
 
     void setSelectable(bool value) { selectEnabled = value; }
@@ -24,7 +19,6 @@ public:
     bool isInPlay() { return inPlay; }
 
 private:
-    QRectF rectangle;
     Space *inSpace;
     bool whitePiece;
     bool hover;
@@ -34,9 +28,9 @@ private:
     bool captureEnabled;
     bool captured;
 protected:
-    void mousePressEvent(QGraphicsSceneMouseEvent *event);
-    void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
-    void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
+    void mousePressEvent(QMouseEvent *event);
+    void hoverEnterEvent(QEvent *event);
+    void hoverLeaveEvent(QEvent *event);
 signals:
     void clickCapture(Piece *piece);
     void clickSelect(Piece *piece);
