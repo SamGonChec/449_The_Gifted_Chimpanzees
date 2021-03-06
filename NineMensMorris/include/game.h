@@ -44,8 +44,11 @@ public:
 
     //Functions for testing
     Space *getSpace(int spaceIndex) { return spaceList[spaceIndex]; }
+    Piece *getWhitePiece(int pieceIndex) { return whitePieces[pieceIndex]; }
+    Piece *getBlackPiece(int pieceIndex) { return blackPieces[pieceIndex]; }
 
     bool testWhiteTurn() { return whiteTurn; }
+    void endPhaseOne();
 
 private:
     QGraphicsScene *scene;

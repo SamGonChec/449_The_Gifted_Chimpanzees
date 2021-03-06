@@ -237,7 +237,7 @@ void Game::checkForMovesVictory() {
     //Counting the unoccupied spaces adjacent to black pieces
     if (whiteTurn) {
         for (i = 0; i < blackPieces.size(); i++) {
-            if (!blackPieces[i]->isCaptured()) {
+            if (!blackPieces[i]->isCaptured() && blackPieces[i]->isInPlay()) {
                 adjacentSpaces = adjacentList[getSpaceIndex(blackPieces[i]->getSpace())];
                 for (j = 0; j < adjacentSpaces.size(); j++) {
                     if (!spaceList[adjacentSpaces[j]]->isOccupied()) {
@@ -249,7 +249,7 @@ void Game::checkForMovesVictory() {
     //Counting the unoccupied spaces adjacent to white pieces
     } else {
         for (i = 0; i < whitePieces.size(); i++) {
-            if (!whitePieces[i]->isCaptured()) {
+            if (!whitePieces[i]->isCaptured() && blackPieces[i]->isInPlay()) {
                 adjacentSpaces = adjacentList[getSpaceIndex(whitePieces[i]->getSpace())];
                 for (j = 0; j < adjacentSpaces.size(); j++) {
                     if (!spaceList[adjacentSpaces[j]]->isOccupied()) {
@@ -439,6 +439,12 @@ void Game::startNewTurn() {
         //Enables appropriate side to select and move a piece
         enableSelectPiece();
     }
+}
+
+void Game::endPhaseOne() {
+    phaseOneComplete = true;
+    setAllSpaceValidity(false);
+    enableSelectPiece();
 }
 
 void Game::pieceCaptureAction(Piece *piece) {
