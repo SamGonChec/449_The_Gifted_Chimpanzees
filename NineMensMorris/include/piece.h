@@ -29,8 +29,8 @@ private:
     bool captured;
 protected:
     void mousePressEvent(QMouseEvent *event);
-    void hoverEnterEvent(QEvent *event);
-    void hoverLeaveEvent(QEvent *event);
+    void enterEvent(QEvent *event);
+    void leaveEvent(QEvent *event);
 signals:
     void clickCapture(Piece *piece);
     void clickSelect(Piece *piece);

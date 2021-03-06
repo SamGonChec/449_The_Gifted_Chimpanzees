@@ -44,13 +44,13 @@ void Piece::mousePressEvent(QMouseEvent */*event*/) {
     }
 }
 
-void Piece::hoverEnterEvent(QEvent */*event*/) {
+void Piece::enterEvent(QEvent */*event*/) {
 /*Change appearance when mouse enters rect*/
     hover = true;
     update();
 }
 
-void Piece::hoverLeaveEvent(QEvent */*event*/) {
+void Piece::leaveEvent(QEvent */*event*/) {
 /*Change appearance when mouse leaves rect*/
     hover = false;
     update();

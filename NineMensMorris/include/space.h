@@ -8,7 +8,6 @@ class Space : public QWidget {
     Q_OBJECT
 public:
     Space(int x, int y);
-    //void paint(QPainter * painter, const QStyleOptionGraphicsItem *option = 0, QWidget *widget = 0);
     void paintEvent(QPaintEvent * event);
 
     bool isOccupied() { return occupied; }
