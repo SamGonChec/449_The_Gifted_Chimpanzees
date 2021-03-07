@@ -48,6 +48,10 @@ public:
     Piece *getBlackPiece(int pieceIndex) { return blackPieces[pieceIndex]; }
 
     bool testWhiteTurn() { return whiteTurn; }
+    bool testWhiteFlying() { return whiteFlying; }
+    bool testBlackFlying() { return blackFlying; }
+    bool testWhiteVictory() { return whiteVictory; }
+    bool testBlackVictory() { return blackVictory; }
     void endPhaseOne();
 
 private:

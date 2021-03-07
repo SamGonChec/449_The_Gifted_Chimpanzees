@@ -104,7 +104,10 @@ Game::Game(QGraphicsScene *scene) {
 // Freeing up piece memory at the end of the game
 void Game::pieceCleanup(std::vector<Piece*> &pieces){
     for (Piece* pointer: pieces){
-        scene->removeItem(pointer->graphicsProxyWidget());
+        //Making sure the piece hasn't already been removed from scene
+        if (pointer->graphicsProxyWidget()->scene() != NULL) {
+            scene->removeItem(pointer->graphicsProxyWidget());
+        }
         delete pointer;
     }
     pieces.clear();

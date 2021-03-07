@@ -34,6 +34,30 @@ private slots:
     void testSelectMoveBlack();
 
     void testSelectMoveInvalid();
+    //AC 5.3
+    void testWhiteCapture();
+    //AC 5.4
+    void testBlackCapture();
+    //AC 5.4
+    void testCaptureWhiteFromMill();
+    //AC 5.3
+    void testCaptureBlackFromMill();
+    //AC 5.4
+    void testCaptureWhiteInvalid();
+    //AC 5.3
+    void testCaptureBlackInvalid();
+    //AC 6
+    void testWhiteFlying();
+    //AC 6
+    void testBlackFlying();
+    //AC 7.1
+    void testWhitePieceVictory();
+    //AC 7.5
+    void testBlackPieceVictory();
+
+    void testWhiteMovesVictory();
+    //AC 7.6
+    void testBlackMovesVictory();
 
 };
 #endif // TST_GAMELOGIC_H
