@@ -11,8 +11,8 @@ class GameLogic : public QObject
     Q_OBJECT
 
 public:
-    GameLogic();
-    ~GameLogic();
+    GameLogic() {}
+    ~GameLogic() {}
 
 private:
     QGraphicsScene testScene;
@@ -46,9 +46,9 @@ private slots:
     void testCaptureWhiteInvalid();
     //AC 5.3
     void testCaptureBlackInvalid();
-    //AC 6
+    //AC 6.3
     void testWhiteFlying();
-    //AC 6
+    //AC 6.4
     void testBlackFlying();
     //AC 7.1
     void testWhitePieceVictory();
