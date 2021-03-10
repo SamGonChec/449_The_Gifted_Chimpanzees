@@ -68,35 +68,52 @@ Game::Game(QGraphicsScene *scene) {
     }
 
     //Adding white pieces
-    whitePieces.push_back(new Piece(100, 720));
-    whitePieces.push_back(new Piece(150, 720));
-    whitePieces.push_back(new Piece(200, 720));
-    whitePieces.push_back(new Piece(250, 720));
-    whitePieces.push_back(new Piece(300, 720));
-    whitePieces.push_back(new Piece(125, 760));
-    whitePieces.push_back(new Piece(175, 760));
-    whitePieces.push_back(new Piece(225, 760));
-    whitePieces.push_back(new Piece(275, 760));
+    whitePieces.push_back(new Piece(-30, 225));
+    whitePieces.push_back(new Piece(-30, 275));
+    whitePieces.push_back(new Piece(-30, 325));
+    whitePieces.push_back(new Piece(-30, 375));
+    whitePieces.push_back(new Piece(-30, 425));
+    whitePieces.push_back(new Piece(-70, 250));
+    whitePieces.push_back(new Piece(-70, 300));
+    whitePieces.push_back(new Piece(-70, 350));
+    whitePieces.push_back(new Piece(-70, 400));
     for (i = 0; i < whitePieces.size(); i++) {
         scene->addWidget(whitePieces[i]);
     }
 
     //Adding black pieces
-    blackPieces.push_back(new Piece(475, 720, false));
-    blackPieces.push_back(new Piece(525, 720, false));
-    blackPieces.push_back(new Piece(575, 720, false));
-    blackPieces.push_back(new Piece(625, 720, false));
-    blackPieces.push_back(new Piece(675, 720, false));
-    blackPieces.push_back(new Piece(500, 760, false));
-    blackPieces.push_back(new Piece(550, 760, false));
-    blackPieces.push_back(new Piece(600, 760, false));
-    blackPieces.push_back(new Piece(650, 760, false));
+    blackPieces.push_back(new Piece(800, 225, false));
+    blackPieces.push_back(new Piece(800, 275, false));
+    blackPieces.push_back(new Piece(800, 325, false));
+    blackPieces.push_back(new Piece(800, 375, false));
+    blackPieces.push_back(new Piece(800, 425, false));
+    blackPieces.push_back(new Piece(840, 250, false));
+    blackPieces.push_back(new Piece(840, 300, false));
+    blackPieces.push_back(new Piece(840, 350, false));
+    blackPieces.push_back(new Piece(840, 400, false));
     for (i = 0; i < blackPieces.size(); i++) {
         scene->addWidget(blackPieces[i]);
     }
 
     //Selecting first piece
     selectPiece(whitePieces[0]);
+
+    // add label for displaying title above board
+    QLabel *titleLabel = new QLabel("Nine Men's Morris");
+    QFont titleFont("Arial", 16);
+    titleLabel->setFont(titleFont);
+    titleLabel->setFrameStyle(QFrame::Panel | QFrame::Raised);
+    titleLabel->setGeometry(300,-40,180,25);
+    scene->addWidget(titleLabel);
+
+    // add status label to scene
+    QLabel *turnLabel = new QLabel("turnContents");
+    turnLabel->setGeometry(100,700,100,100);
+    scene->addWidget(turnLabel);
+
+    QLabel *statusLabel = new QLabel("statusContents");
+    statusLabel->setGeometry(300,700,100,50);
+    scene->addWidget(statusLabel);
 
 }
 

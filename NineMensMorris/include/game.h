@@ -8,6 +8,9 @@
 #include <vector>
 #include <QObject>
 #include <QGraphicsScene>
+#include <QLabel>
+#include <QString>
+#include <QFont>
 #include <QtWidgets/QGraphicsProxyWidget>
 
 
@@ -66,6 +69,9 @@ private:
     std::vector<Space*> spaceList;
     std::vector<Piece*> whitePieces;
     std::vector<Piece*> blackPieces;
+
+    QLabel *titleLabel, *turnLabel, *statusLabel;
+    QString turnContents, statusContents;
 
 signals:
 
