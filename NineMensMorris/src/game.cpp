@@ -98,25 +98,42 @@ Game::Game(QGraphicsScene *scene) {
     //Selecting first piece
     selectPiece(whitePieces[0]);
 
+    QFont titleFont("Comic Sans MS", 16);
+    QFont statusFont("Comic Sans MS", 12);
+    QFont pieceFont("Comic Sans MS", 11);
+
     // add label for displaying title above board
     QLabel *titleLabel = new QLabel("Nine Men's Morris");
-    QFont titleFont("Arial", 16);
     titleLabel->setFont(titleFont);
     titleLabel->setFrameStyle(QFrame::Panel | QFrame::Raised);
-    titleLabel->setGeometry(300,-40,180,25);
+    titleLabel->setLineWidth(2);
+    titleLabel->setGeometry(300,-40,195,30);
     scene->addWidget(titleLabel);
 
-    // add status label to scene
-    QLabel *turnLabel = new QLabel("turnContents");
-    turnLabel->setGeometry(100,700,100,100);
-    scene->addWidget(turnLabel);
+    // add text item for displaying player instructions
+    instructionText = new QGraphicsTextItem("Place your pieces on the board!");
+    instructionText->setFont(statusFont);
+    instructionText->setTextWidth(375);
+    instructionText->setPos(50,700);
+    scene->addItem(instructionText);
 
-    QLabel *statusLabel = new QLabel("statusContents");
-    statusLabel->setGeometry(300,700,100,50);
-    scene->addWidget(statusLabel);
+    // add text item for displaying the turn number
+    turnText = new QGraphicsTextItem("Turn Number: 1");
+    turnText->setFont(statusFont);
+    turnText->setPos(625,700);
+    scene->addItem(turnText);
 
+    // add text items for displaying the current player's turn
+    whitePieceText = new QGraphicsTextItem("White Piece's Turn!");
+    whitePieceText->setFont(pieceFont);
+    whitePieceText->setPos(-100, 180);
+    scene->addItem(whitePieceText);
+
+    blackPieceText = new QGraphicsTextItem();
+    blackPieceText->setFont(pieceFont);
+    blackPieceText->setPos(780, 180);
+    scene->addItem(blackPieceText);
 }
-
 
 // Freeing up piece memory at the end of the game
 void Game::pieceCleanup(std::vector<Piece*> &pieces){
@@ -174,6 +191,37 @@ bool Game::pieceInMill(Piece *piece) {
         }
     }
     return false;
+}
+
+void Game::setTurnCountText(int turn) {
+/* Updates turn text item to display the current turn number */
+    turnText->setPlainText("Turn Number: " + QString::number(turn+1));
+}
+
+void Game::setPlayerTurnText(bool whitePiece) {
+/* Updates player piece text items to show current player's turn */
+    if (whitePiece) {
+        whitePieceText->setPlainText("White's Turn!");
+        blackPieceText->setPlainText("");
+    }
+    else {
+        whitePieceText->setPlainText("");
+        blackPieceText->setPlainText("Black's Turn!");
+    }
+}
+
+void Game::setInstructionText(int turnNumber, bool captureMode) {
+/* Updates instruction text item to assist player in what move they must take */
+    if (turnNumber < 9 && !captureMode) {
+        instructionText->setPlainText("Place your pieces on the board!");
+    }
+    else if (turnNumber >= 9 && !captureMode) {
+        instructionText->setPlainText("Move your pieces to form a mill!");
+    }
+    else if (captureMode) {
+        instructionText->setPlainText("A mill has been formed! "\
+                                      "Remove an opponent's piece.");
+    }
 }
 
 void Game::checkForNewMill() {
@@ -294,9 +342,9 @@ void Game::evaluateVictoryConditions() {
         checkForPieceVictory();
     }
     if (whiteVictory) {
-        scene->addText("White Wins!");
+        instructionText->setPlainText("White Wins!");
     } else if (blackVictory) {
-        scene->addText("Black Wins!");
+        instructionText->setPlainText("Black Wins!");
     }
     else {
         startNewTurn();
@@ -368,6 +416,7 @@ void Game::enableCapturePiece() {
     unsigned int i;
     int count = 0;
     captureMode = true;
+    setInstructionText(turnNumber, captureMode);
     if (whiteTurn) {
         //First pass selects pieces not in a mill
         for (i = 0; i < blackPieces.size(); i++) {
@@ -438,6 +487,11 @@ void Game::startNewTurn() {
         turnNumber++;
     }
     whiteTurn = !whiteTurn;
+
+    setTurnCountText(turnNumber);
+    setPlayerTurnText(whiteTurn);
+    setInstructionText(turnNumber);
+
     if (!phaseOneComplete) {
         if (turnNumber < 9) {
             //Selects the next unplayed piece in first phase of game

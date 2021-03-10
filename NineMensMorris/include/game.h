@@ -29,6 +29,10 @@ public:
     void setAllSpaceValidity(bool value);
     bool pieceInMill(Piece *piece);
 
+    void setTurnCountText(int turn);
+    void setPlayerTurnText(bool whitePiece);
+    void setInstructionText(int turnNumber, bool captureMode = false);
+
     void checkForNewMill();
     void checkForFlying();
     void checkForPieceVictory();
@@ -70,8 +74,12 @@ private:
     std::vector<Piece*> whitePieces;
     std::vector<Piece*> blackPieces;
 
-    QLabel *titleLabel, *turnLabel, *statusLabel;
-    QString turnContents, statusContents;
+    QLabel *titleLabel;
+
+    QGraphicsTextItem *turnText;
+    QGraphicsTextItem *whitePieceText;
+    QGraphicsTextItem *blackPieceText;
+    QGraphicsTextItem *instructionText;
 
 signals:
 

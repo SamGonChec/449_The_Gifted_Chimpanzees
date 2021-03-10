@@ -15,7 +15,7 @@ int main(int argc, char *argv[]) {
     Game game(&scene);
 
     //Adjusting the view, setting the scene
-    view.resize(1000,900);
+    view.resize(1100,900);
     view.setScene(&scene);
     view.setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view.setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
