@@ -2,7 +2,7 @@
 #include "include/piece.h"
 #include "include/space.h"
 #include "include/game.h"
-
+#include "include/gamemanager.h"
 #include <QApplication>
 #include <QGraphicsScene>
 #include <QGraphicsView>
@@ -10,16 +10,9 @@
 
 int main(int argc, char *argv[]) {
     QApplication application(argc, argv);
-    QGraphicsScene scene;
-    QGraphicsView view;
-    Game game(&scene);
 
-    //Adjusting the view, setting the scene
-    view.resize(1100,900);
-    view.setScene(&scene);
-    view.setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    view.setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    /* calling the class in charge of the menu and changing scenes*/
+    GameManager manager;
 
-    view.show();
     return application.exec();
 }
