@@ -10,18 +10,22 @@ CONFIG += c++11
 
 SOURCES += \
     src/board.cpp \
-    src/button.cpp \
     src/game.cpp \
+    src/gamemanager.cpp \
     src/main.cpp \
+    src/menu.cpp \
     src/piece.cpp \
-    src/space.cpp
+    src/space.cpp \
+    src/tutorial.cpp
 
 HEADERS += \
     include/board.h \
-    include/button.h \
     include/game.h \
+    include/gamemanager.h \
+    include/menu.h \
     include/piece.h \
-    include/space.h
+    include/space.h \
+    include/tutorial.h
 
 FORMS +=
 
@@ -29,3 +33,6 @@ FORMS +=
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    src/res.qrc
