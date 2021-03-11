@@ -4,6 +4,7 @@ Game::~Game(){
     Game::pieceCleanup(whitePieces);
     Game::pieceCleanup(blackPieces);
     Game::spaceCleanup(spaceList);
+    Game::textItemCleanup();
     scene->removeItem(board->graphicsProxyWidget());
 }
 
@@ -98,17 +99,16 @@ Game::Game(QGraphicsScene *scene) {
     //Selecting first piece
     selectPiece(whitePieces[0]);
 
+    // initialize text fonts
     QFont titleFont("Comic Sans MS", 16);
     QFont statusFont("Comic Sans MS", 12);
     QFont pieceFont("Comic Sans MS", 11);
 
-    // add label for displaying title above board
-    QLabel *titleLabel = new QLabel("Nine Men's Morris");
-    titleLabel->setFont(titleFont);
-    titleLabel->setFrameStyle(QFrame::Panel | QFrame::Raised);
-    titleLabel->setLineWidth(2);
-    titleLabel->setGeometry(300,-40,195,30);
-    scene->addWidget(titleLabel);
+    // add text item for displaying title above board
+    titleText = new QGraphicsTextItem("Nine Men's Morris");
+    titleText->setFont(titleFont);
+    titleText->setPos(300,-40);
+    scene->addItem(titleText);
 
     // add text item for displaying player instructions
     instructionText = new QGraphicsTextItem("Place your pieces on the board!");
@@ -151,6 +151,15 @@ void Game::spaceCleanup(std::vector<Space*> &spaces){
         delete pointer;
     }
     spaces.clear();
+}
+
+void Game::textItemCleanup() {
+/* Remove text items from memory at the end of the game */
+    scene->removeItem(titleText);
+    scene->removeItem(instructionText);
+    scene->removeItem(turnText);
+    scene->removeItem(whitePieceText);
+    scene->removeItem(blackPieceText);
 }
 
 int Game::getSpaceIndex(Space *space) {

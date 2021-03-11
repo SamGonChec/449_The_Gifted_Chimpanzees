@@ -23,6 +23,7 @@ public:
     void pieceCleanup(std::vector<Piece*> &pieces);
     void boardCleanup(QGraphicsProxyWidget* proxyBoard);
     void spaceCleanup(std::vector<Space*> &spaces);
+    void textItemCleanup();
 
     int getSpaceIndex(Space *space);
     void setAdjacentSpaces(Piece *piece, bool value);
@@ -74,8 +75,7 @@ private:
     std::vector<Piece*> whitePieces;
     std::vector<Piece*> blackPieces;
 
-    QLabel *titleLabel;
-
+    QGraphicsTextItem *titleText;
     QGraphicsTextItem *turnText;
     QGraphicsTextItem *whitePieceText;
     QGraphicsTextItem *blackPieceText;
